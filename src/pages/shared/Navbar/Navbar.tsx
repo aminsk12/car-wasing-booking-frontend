@@ -37,12 +37,12 @@ const Navbar = () => {
 
   return (
     <header
-      className={`bg-[#30415A] text-white rounded-sm ${isDarkMode ? "dark" : ""}`}
+      className={`bg-[#075fe2] text-white rounded-sm ${isDarkMode ? "dark" : ""}`}
     >
       {/* fixed z-10 bg-opacity-30  */}
-      <nav className="container text-white bg-[#30415A]  mx-auto flex items-center justify-between space-x-10 py-4">
+      <nav className="container text-white   mx-auto flex items-center justify-between space-x-10 py-4">
         <Link to="/" className="text-white font-bold text-lg">
-          Car Wash
+        <img src="/src/assets/logo.jpg" alt="logo" width="100" height="200" className="rounded-full"/>
         </Link>
 
         <div className="hidden md:flex items-center space-x-5">

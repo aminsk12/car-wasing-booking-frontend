@@ -15,7 +15,7 @@ const Location = () => {
   return (
     <div>
       <h1 style={headingStyle}>Welcome to the Car Washing Booking System</h1>
-      <LoadScript googleMapsApiKey="AIzaSyBAkRc51qa34Rawl1ebtSjyL2rDk_r4E28">
+      <LoadScript googleMapsApiKey="AIzaSyDbd-gwqVABJSOtt57JaDtBW7BATlJKY2A">
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}

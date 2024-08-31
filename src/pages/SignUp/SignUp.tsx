@@ -38,7 +38,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#30415A] via-[#3D6D8D] to-[#4A9BB5]">
+    <div className="min-h-screen flex items-center justify-center bg-[#9ce3ff]">
       <div className="w-full max-w-md bg-white shadow-md rounded-lg p-8">
         <h2 className="text-2xl font-semibold text-center text-[#30415A]">
           Sign Up

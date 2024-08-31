@@ -7,11 +7,11 @@ const Banner = () => {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('https://rb.gy/dmrzfs')`,
+          backgroundImage: `url('https://onebyte.us/img/gallery/5-of-the-best-car-wash-soaps-for-your-vehicle/intro-1705512855.jpg')`,
         }}
       ></div>
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-gray-800/60"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-gray-900/60"></div>
       {/* Content Wrapper */}
       <div className="relative container mx-auto px-4 py-24 lg:py-32 text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">
@@ -24,7 +24,7 @@ const Banner = () => {
         <div className="flex justify-center gap-4">
           <Link
             to="/services"
-            className="bg-yellow-400 text-black font-semibold py-3 px-4 rounded-lg hover:bg-[#30415A] hover:text-white transition duration-300 shadow-lg text-xl md:text-2xl sm:text-xl"
+            className="bg-yellow-500 text-black font-semibold py-3 px-4 rounded-lg hover:bg-[#30415A] hover:text-white transition duration-300 shadow-lg text-xl md:text-2xl sm:text-xl"
           >
             Explore Services
           </Link>
