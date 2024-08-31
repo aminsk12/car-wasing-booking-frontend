@@ -17,6 +17,7 @@ import BookingList from "@/components/UserManagement/BookingList";
 import UpdateProfile from "@/components/UpdateProfiles/UpdateProfiles";
 import AllReviews from "@/pages/Home/Reviews/AllReviews";
 import PrivateRoute from "./PrivateRoutes";
+import About from "@/pages/About/About";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
 
       { path: "services", element: <Services /> },
+      { path: "about", element: <About /> },
       {
         path: "services/:id",
         element: (

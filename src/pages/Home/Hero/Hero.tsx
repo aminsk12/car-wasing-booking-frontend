@@ -10,7 +10,7 @@ const Hero = () => {
           src="https://5.imimg.com/data5/HC/DQ/MY-9005253/car-wash-chemicals-500x500.jpg"
           alt=""
         />
-        <div className="flex flex-1 flex-col justify-between p-4 leading-normal">
+        <div className="flex gap-48 flex-1 flex-col justify-between p-4 leading-normal">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Car Washing Foam,इन बेस्ट Car Washing Foam से आपको मिलेगी जबरदस्त
             सफाई, पेंट पर नहींं आएगा स्क्रैच - car washing foam for scratch less

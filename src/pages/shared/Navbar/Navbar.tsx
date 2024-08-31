@@ -1,4 +1,4 @@
-import { Moon, Sun } from "lucide-react"; // Import the Sun icon as well
+import { Moon, Sun } from "lucide-react"; 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
@@ -7,7 +7,7 @@ import { logout } from "@/redux/features/userSlice";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false); 
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -19,7 +19,7 @@ const Navbar = () => {
 
   const handleDarkModeToggle = () => {
     setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark", !isDarkMode); // Toggle dark mode class on <html>
+    document.documentElement.classList.toggle("dark", !isDarkMode); 
   };
 
   const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ const Navbar = () => {
   // Get the user's authentication state
   const { token } = useAppSelector((state) => state.user);
 
-  // Dummy user avatar; replace with actual data from user profile if available
+  
   const userAvatar = "https://avatar.iran.liara.run/public";
 
   const handleLogout = () => {
@@ -41,8 +41,8 @@ const Navbar = () => {
     >
       {/* fixed z-10 bg-opacity-30  */}
       <nav className="container text-white   mx-auto flex items-center justify-between space-x-10 py-4">
-        <Link to="/" className="text-white font-bold text-lg">
-        <img src="/src/assets/logo.jpg" alt="logo" width="100" height="200" className="rounded-full"/>
+        <Link to="/" >
+        <img src="https://i.ibb.co/4PYfxBD/logo.jpg" alt="logo" width="50" height="10" className="rounded-full"/>
         </Link>
 
         <div className="hidden md:flex items-center space-x-5">
@@ -50,9 +50,25 @@ const Navbar = () => {
             <li>
               <Link
                 className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
+                to="/"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
                 to="/services"
               >
                 Services
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
+                to="/about"
+              >
+                About
               </Link>
             </li>
             <li>
@@ -146,6 +162,14 @@ const Navbar = () => {
       {isMenuOpen && (
         <ul className="md:hidden flex flex-col items-center space-y-5 mt-4 transition-all duration-300 ease-in-out">
           <li>
+              <Link
+                className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
+                to="/"
+              >
+                Home
+              </Link>
+            </li>
+          <li>
             <Link
               className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
               to="/services"
@@ -154,6 +178,14 @@ const Navbar = () => {
               Services
             </Link>
           </li>
+          <li>
+              <Link
+                className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
+                to="/about"
+              >
+                About
+              </Link>
+            </li>
           <li>
             <Link
               className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
