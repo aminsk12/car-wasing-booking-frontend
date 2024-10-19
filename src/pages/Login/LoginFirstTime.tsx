@@ -2,24 +2,25 @@ import { useLoginMutation } from "@/redux/api/authApi";
 import { setLoginEmail, setLoginPassword } from "@/redux/features/loginSlice";
 import { setToken, setUser } from "@/redux/features/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation()
-  const from = location?.state || '/'
+
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state) => state.login);
-  const [login] = useLoginMutation();
 
+  const [Login] = useLoginMutation();
+
+  // const { token } = useAppSelector((state: RootState) => state.user);
+  // console.log("token", token);
   type Inputs = {
     email: string;
     password: string;
   };
-
   const {
     register,
     handleSubmit,
@@ -32,8 +33,9 @@ const Login: React.FC = () => {
       password: data.password,
     };
     try {
-      const user = await login(loginInfo);
+      const user = await Login(loginInfo);
       const err = user?.error as { data?: { message?: string } };
+      // console.log(err?.data?.message);
 
       if (err?.data?.message === "User Not Found") {
         toast.error("User Not Found");
@@ -43,14 +45,31 @@ const Login: React.FC = () => {
         toast.success("User Login Successfully");
         const { token } = user.data;
         const userToken = jwtDecode(token);
+        // console.log("token: ", token, "user: ", user, "UserToken: ", userToken);
         dispatch(setToken(token));
         dispatch(setUser(userToken));
-        navigate(from);
+        navigate("/"); // Redirect to login on success
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
+
+  //! First Time
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   const { data } = await Login({ email, password });
+
+  //   const { token } = data;
+
+  //   const user = jwtDecode(token);
+
+  //   // console.log("token", token, "user:", user);
+  //   dispatch(setToken(token));
+  //   dispatch(setUser(user));
+  //   toast.success("User Login Successfully")
+  //   navigate("/");
+  // };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#30415A] via-[#3D6D8D] to-[#4A9BB5]">
@@ -58,27 +77,6 @@ const Login: React.FC = () => {
         <h2 className="text-2xl font-semibold text-center text-[#30415A]">
           Login
         </h2>
-        {/* Demo Credentials Section */}
-        <div className="mt-6 p-4 border-t border-gray-300">
-          <div className="mt-2">
-            <h4 className="text-md font-medium">Admin Login</h4>
-            <p className="text-gray-700">
-              Email: <span className="font-bold">admin@gmail.com</span>
-            </p>
-            <p className="text-gray-700">
-              Password: <span className="font-bold">ph-password</span>
-            </p>
-          </div>
-          <div className="mt-2">
-            <h4 className="text-md font-medium">User Login</h4>
-            <p className="text-gray-700">
-              Email: <span className="font-bold">user@gmail.com</span>
-            </p>
-            <p className="text-gray-700">
-              Password: <span className="font-bold">ph-password</span>
-            </p>
-          </div>
-        </div>
         <form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label
@@ -88,7 +86,7 @@ const Login: React.FC = () => {
               Email
             </label>
             <input
-              type="email"
+              type="text"
               id="email"
               value={email}
               {...register("email", { required: true })}
@@ -112,7 +110,7 @@ const Login: React.FC = () => {
               value={password}
               {...register("password", { required: true })}
               onChange={(e) => dispatch(setLoginPassword(e.target.value))}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#30415A] focus:border-[#30415A] sm:text-sm"
+              className="mt-1 block w-full dark:text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#30415A] focus:border-[#30415A] sm:text-sm"
             />
             {errors.password?.type === "required" && (
               <p className="text-red-500">Password is required</p>
@@ -127,14 +125,14 @@ const Login: React.FC = () => {
                 New here? Register now
               </Link>
             </div>
-            {/* <div className="text-sm">
+            <div className="text-sm">
               <a
                 href="#"
                 className="font-medium text-[#30415A] hover:text-[#3D6D8D]"
               >
                 Forgot your password?
               </a>
-            </div> */}
+            </div>
           </div>
           <div>
             <button

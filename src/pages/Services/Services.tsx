@@ -4,13 +4,18 @@ import { useGetServicesQuery } from "@/redux/api/servicesApi";
 import { setSearch, setSort, setFilter } from "@/redux/features/searchSlice";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { Helmet } from "react-helmet-async";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 const Services = () => {
   const { search, sort, filter } = useAppSelector((state) => state.search);
   const dispatch = useAppDispatch();
 
   // Fetch services based on search, sort, and filter options
-  const { data } = useGetServicesQuery({ searchTerm: search, sort, filter });
+  const { data, isLoading } = useGetServicesQuery({
+    searchTerm: search,
+    sort,
+    filter,
+  });
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -33,8 +38,8 @@ const Services = () => {
       <Helmet>
         <title>All Service - Car Washing</title>
       </Helmet>
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#30415A] drop-shadow-lg">
+      <div className="container mt-10 mx-auto px-4 text-center">
+        <h2 className="text-4xl md:text-4xl font-bold mb-8 text-[#30415A] drop-shadow-lg dark:text-white">
           Our Services
         </h2>
 
@@ -74,11 +79,17 @@ const Services = () => {
           </select>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data?.data?.map((service: any) => (
-            <ServiceCard key={service._id} service={service} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center items-center">
+            <LoadingSpinner></LoadingSpinner>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {data?.data?.map((service: any) => (
+              <ServiceCard key={service._id} service={service} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

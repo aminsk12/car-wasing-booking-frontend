@@ -1,13 +1,12 @@
-import { Moon, Sun } from "lucide-react"; 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { logout } from "@/redux/features/userSlice";
+import { logout, setUser } from "@/redux/features/userSlice";
+import { setLoginEmail, setLoginPassword } from "@/redux/features/loginSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false); 
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -17,44 +16,30 @@ const Navbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleDarkModeToggle = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark", !isDarkMode); 
-  };
-
   const dispatch = useAppDispatch();
 
-  // Get the user's authentication state
-  const { token } = useAppSelector((state) => state.user);
+  const { token, user } = useAppSelector((state) => state.user);
 
-  
   const userAvatar = "https://avatar.iran.liara.run/public";
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(setUser(""));
+    dispatch(setLoginEmail(""));
+    dispatch(setLoginPassword(""));
     setIsDropdownOpen(false);
   };
 
   return (
-    <header
-      className={`bg-[#075fe2] text-white rounded-sm ${isDarkMode ? "dark" : ""}`}
-    >
-      {/* fixed z-10 bg-opacity-30  */}
-      <nav className="container text-white   mx-auto flex items-center justify-between space-x-10 py-4">
-        <Link to="/" >
-        <img src="https://i.ibb.co/4PYfxBD/logo.jpg" alt="logo" width="50" height="10" className="rounded-full"/>
+    <header className="bg-[#30415A] fixed w-full z-10 shadow-sm text-white rounded-sm">
+      <nav className="container text-white bg-[#30415A] mx-auto flex items-center justify-between space-x-10 py-4">
+        <Link to="/" className="text-white font-bold text-lg">
+          Car Wash
         </Link>
 
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-5">
           <ul className="flex items-center space-x-5">
-            <li>
-              <Link
-                className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
-                to="/"
-              >
-                Home
-              </Link>
-            </li>
             <li>
               <Link
                 className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
@@ -63,14 +48,16 @@ const Navbar = () => {
                 Services
               </Link>
             </li>
-            <li>
-              <Link
-                className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
-                to="/about"
-              >
-                About
-              </Link>
-            </li>
+            {user?.role !== "admin" && (
+              <li>
+                <Link
+                  className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
+                  to="/booking"
+                >
+                  Bookings
+                </Link>
+              </li>
+            )}
             <li>
               <Link
                 className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
@@ -82,7 +69,7 @@ const Navbar = () => {
             {!token ? (
               <li>
                 <Link
-                  className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
+                  className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:text-black transition duration-300"
                   to="/login"
                 >
                   Login
@@ -95,16 +82,22 @@ const Navbar = () => {
                   alt="User Avatar"
                   className="w-8 h-8 rounded-full cursor-pointer"
                   onClick={handleAvatarClick}
-                  style={{ zIndex: 10 }} // Add z-index here
                 />
                 {isDropdownOpen && (
                   <ul className="absolute right-0 mt-1 w-20 bg-white text-black rounded-lg shadow-lg z-20">
-                    {" "}
-                    {/* Add z-index here */}
+                    <li>
+                      <Link
+                        to="/update-profile"
+                        className="block w-full rounded-lg text-left px-4 py-2 text-sm hover:bg-gray-200"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        Profile
+                      </Link>
+                    </li>
                     <li>
                       <button
                         onClick={handleLogout}
-                        className="block w-full text-left px-4 py-2 text-sm "
+                        className="block w-full rounded-lg hover:bg-gray-200 text-left px-4 py-2 text-sm"
                       >
                         Logout
                       </button>
@@ -113,19 +106,10 @@ const Navbar = () => {
                 )}
               </li>
             )}
-            <li>
-              <button
-                aria-label="Toggle Dark Mode"
-                onClick={handleDarkModeToggle} // Add dark mode toggle handler
-                className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
-              >
-                {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}{" "}
-                {/* Toggle icon based on dark mode state */}
-              </button>
-            </li>
           </ul>
         </div>
 
+        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
           <button
             onClick={handleMenuToggle}
@@ -159,16 +143,9 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <ul className="md:hidden flex flex-col items-center space-y-5 mt-4 transition-all duration-300 ease-in-out">
-          <li>
-              <Link
-                className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
-                to="/"
-              >
-                Home
-              </Link>
-            </li>
           <li>
             <Link
               className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
@@ -178,14 +155,17 @@ const Navbar = () => {
               Services
             </Link>
           </li>
-          <li>
+          {user?.role !== "admin" && (
+            <li>
               <Link
                 className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
-                to="/about"
+                to="/booking"
+                onClick={handleMenuToggle}
               >
-                About
+                Bookings
               </Link>
             </li>
+          )}
           <li>
             <Link
               className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
@@ -196,7 +176,7 @@ const Navbar = () => {
             </Link>
           </li>
           {!token ? (
-            <li className="relative">
+            <li>
               <Link
                 className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
                 to="/login"
@@ -206,7 +186,7 @@ const Navbar = () => {
               </Link>
             </li>
           ) : (
-            <li>
+            <li className="relative">
               <img
                 src={userAvatar}
                 alt="User Avatar"
@@ -216,8 +196,23 @@ const Navbar = () => {
               {isDropdownOpen && (
                 <ul className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
                   <li>
+                    <Link
+                      to="/update-profile"
+                      className="block w-full rounded-lg text-left px-4 py-2 text-sm hover:bg-gray-200"
+                      onClick={() => {
+                        setIsDropdownOpen(false);
+                        setIsMenuOpen(false); // Close the menu after clicking
+                      }}
+                    >
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
                     <button
-                      onClick={handleLogout}
+                      onClick={() => {
+                        handleLogout();
+                        setIsMenuOpen(false); // Close the menu after logout
+                      }}
                       className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-200"
                     >
                       Logout
@@ -227,16 +222,6 @@ const Navbar = () => {
               )}
             </li>
           )}
-          <li>
-            <button
-              aria-label="Toggle Dark Mode"
-              onClick={handleDarkModeToggle} // Add dark mode toggle handler
-              className="rounded-lg backdrop-blur-[2px] p-1 inline-block text-white hover:bg-white hover:text-black transition duration-300"
-            >
-              {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}{" "}
-              {/* Toggle icon based on dark mode state */}
-            </button>
-          </li>
         </ul>
       )}
     </header>

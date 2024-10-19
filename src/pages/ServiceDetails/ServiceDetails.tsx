@@ -8,9 +8,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { deselectSlot, selectSlot } from "@/redux/features/slotSlice";
-import Loader from "../shared/Loader/Loader";
+import {
+  clearSlots,
+  deselectSlot,
+  selectSlot,
+} from "@/redux/features/slotSlice";
 import { Helmet } from "react-helmet-async";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 const ServiceDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,6 +30,8 @@ const ServiceDetails = () => {
     isLoading: isServiceLoading,
     isError: isServiceError,
   } = useGetServiceByIdQuery(id!);
+  // console.log(id)
+  // console.log(serviceData)
 
   // Fetch slots for the selected service on the selected date
   const {
@@ -33,6 +39,8 @@ const ServiceDetails = () => {
     isLoading: isSlotsLoading,
     isError: isSlotsError,
   } = useGetSlotsByServiceIdQuery(serviceData?.data?._id);
+
+  // console.log(slotsData)
 
   // Fetch User Data
   const { user } = useAppSelector((state) => state.user);
@@ -47,7 +55,10 @@ const ServiceDetails = () => {
 
   const handleBooking = async () => {
     if (selectedSlots.length === 0 || !serviceData || !user.userId) {
-      console.error("Missing booking information");
+      // console.error("Missing booking information");
+      // dispatch(selectSlot(""));
+      dispatch(clearSlots());
+      navigate("/login");
       return;
     }
 
@@ -58,7 +69,8 @@ const ServiceDetails = () => {
   if (isServiceLoading || isSlotsLoading) {
     return (
       <div className="text-center text-lg text-gray-600">
-        <Loader></Loader>{" "}
+        {/* <Loader></Loader>{" "} */}
+        <LoadingSpinner></LoadingSpinner>
       </div>
     );
   }
@@ -77,7 +89,7 @@ const ServiceDetails = () => {
         <title>Service Details - Car Washing</title>
       </Helmet>
       {/* Banner Image */}
-      <div className="relative h-64 md:h-96 mb-8 overflow-hidden rounded-lg">
+      <div className="relative mt-14 h-64 md:h-96 mb-8 overflow-hidden rounded-lg">
         <img
           src={serviceData?.data?.image}
           alt={serviceData?.data?.name}
@@ -91,9 +103,17 @@ const ServiceDetails = () => {
       </div>
 
       {/* Service Description */}
-      <p className="text-lg mb-6 dark:text-white  text-gray-700">
-        {serviceData?.data?.description}
-      </p>
+      <div className="mb-6">
+        <p className="text-lg mb-4 dark:text-gray-300 text-gray-800 leading-relaxed">
+          {serviceData?.data?.description}
+        </p>
+        <p className="text-lg font-semibold mb-4 dark:text-gray-300 text-gray-800">
+          Price: ${serviceData?.data?.price}
+        </p>
+        <p className="text-lg font-semibold mb-6 dark:text-gray-300 text-gray-800">
+          Duration: {serviceData?.data?.duration} minutes
+        </p>
+      </div>
 
       {/* Available Slots Section */}
       <h2 className="text-2xl font-semibold mb-4">

@@ -43,7 +43,7 @@ const ReviewForm = () => {
       }).unwrap();
       toast.success("Successfully Review!");
 
-      console.log("Review submitted successfully");
+      // console.log("Review submitted successfully");
       setRating(0); // Clear rating
       setFeedback(""); // Clear feedback
     } catch (error) {
@@ -52,9 +52,9 @@ const ReviewForm = () => {
   };
 
   return (
-    <section className="py-6">
+    <section className="py-12">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl md:text-4xl font-bold mb-4 dark:text-white text-[#30415A] text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-8 dark:text-white text-[#30415A] text-center">
           Leave a Review
         </h2>
         <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
