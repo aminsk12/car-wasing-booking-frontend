@@ -1,6 +1,7 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import  { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -25,7 +26,7 @@ import {
   TableRow,
 } from "../ui/table";
 import { Input } from "../ui/input";
-import { useGetServicesQuery } from "@/redux/api/servicesApi";
+import { useGetAllServicesQuery } from "@/redux/api/servicesApi";
 import {
   Select,
   SelectTrigger,
@@ -48,7 +49,7 @@ const SlotManagement = () => {
   const { data: slots, refetch } = useGetSlotsQuery(undefined);
   const [updateSlot] = useUpdateSlotMutation();
   const [createSlot] = useCreateSlotMutation();
-  const { data: services } = useGetServicesQuery("");
+  const { data: services } = useGetAllServicesQuery(undefined);
   const { token } = useAppSelector((state) => state.user);
 
   const [service, setService] = useState<string>("");
@@ -155,7 +156,7 @@ const SlotManagement = () => {
                 <SelectContent>
                   {services?.data?.map((service: any) => (
                     <SelectItem key={service._id} value={service._id}>
-                      {service?.name}
+                      {service.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
