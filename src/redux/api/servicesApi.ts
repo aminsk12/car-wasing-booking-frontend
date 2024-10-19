@@ -5,59 +5,59 @@ const authApi = baseApi.injectEndpoints({
     getServices: builder.query({
       query: ({ searchTerm, sort, filter }) => {
         let queryString = `/services?`;
-    
+
         if (searchTerm) {
           queryString += `searchTerm=${searchTerm}&`;
         }
         if (sort) {
           queryString += `sort=${sort}&`;
         }
-        if (filter?.price) {
+        if (filter.price) {
           queryString += `price=${filter.price}&`;
         }
-        if (filter?.duration) {
+        if (filter.duration) {
           queryString += `duration=${filter.duration}&`;
         }
-    
+
         // Remove the trailing '&' or '?' if no filters are applied
-        queryString = queryString?.slice(0, -1);
-    
+        queryString = queryString.slice(0, -1);
+
         return {
           url: queryString,
           method: "GET",
         };
       },
-      providesTags: ["Service"],
+      // providesTags: ["Service"],
     }),
 
     getAllServices: builder.query({
-      query:() =>({
-        url:'/services',
-        method:"GET"
+      query: () => ({
+        url: "/services",
+        method: "GET",
       }),
-      providesTags: ["Service"]
+      providesTags: ["Service"],
     }),
-    
+
     getServiceById: builder.query({
       query: (id: string) => ({
         url: `/services/${id}`,
         method: "GET",
       }),
-      providesTags: ["Service"]
     }),
     getSlotsByServiceId: builder.query({
-      query: (id: string) => ({
-        url: `/slots/availability?serviceId=${id}`,
-        method: "GET",
-      }),
-      providesTags: ["Service"]
+      query: (id: string) => {
+        // console.log(id);
+        return {
+          url: `/slots/availability?serviceId=${id}`,
+          method: "GET",
+        };
+      },
     }),
     getSingleSlotsById: builder.query({
       query: (id: string) => ({
         url: `/slots/availability/${id}`,
         method: "GET",
       }),
-      providesTags: ["Service"]
     }),
 
     //! CRUD
@@ -77,7 +77,7 @@ const authApi = baseApi.injectEndpoints({
     }),
     updateService: builder.mutation({
       query: ({ id, token, updatedService }) => {
-        console.log(id, token, updatedService);
+        // console.log(id, token, updatedService);
         return {
           url: `/services/${id}`,
           method: "PATCH",
@@ -110,5 +110,5 @@ export const {
   useAddServiceMutation,
   useDeleteServiceMutation,
   useUpdateServiceMutation,
-  useGetAllServicesQuery
+  useGetAllServicesQuery,
 } = authApi;
