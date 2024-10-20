@@ -16,6 +16,7 @@ const Services = () => {
     sort,
     filter,
   });
+  //console.log(data);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -86,7 +87,7 @@ const Services = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {data?.data?.map((service: any) => (
-              <ServiceCard key={service._id} service={service} />
+              <ServiceCard key={service?._id} service={service} />
             ))}
           </div>
         )}

@@ -6,7 +6,6 @@ import Login from "@/pages/Login/Login";
 import ServiceDetails from "@/pages/ServiceDetails/ServiceDetails";
 import Services from "@/pages/Services/Services";
 import SignUp from "@/pages/SignUp/SignUp";
-import SuccessPage from "@/pages/Success/Success";
 import Dashboard from "@/pages/Dashboard/Dashboard";
 import ServiceManagement from "@/pages/AdminDashboard/ServiceManagement/ServiceManagement";
 import AdminLayout from "@/layout/AdminLayout";
@@ -17,7 +16,8 @@ import BookingList from "@/components/UserManagement/BookingList";
 import UpdateProfile from "@/components/UpdateProfiles/UpdateProfiles";
 import AllReviews from "@/pages/Home/Reviews/AllReviews";
 import PrivateRoute from "./PrivateRoutes";
-import About from "@/pages/About/About";
+import MyBookings from "@/pages/Booking/MyBookings";
+import Statistics from "@/pages/AdminDashboard/Statistics/Statistics";
 
 const router = createBrowserRouter([
   {
@@ -26,15 +26,13 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { index: true, element: <Home /> },
-
       { path: "services", element: <Services /> },
-      { path: "about", element: <About /> },
       {
         path: "services/:id",
         element: (
-          <PrivateRoute>
+          // <PrivateRoute>
             <ServiceDetails />
-          </PrivateRoute>
+          // </PrivateRoute>
         ),
       },
       {
@@ -45,8 +43,22 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      { path: "update-profile", element: <UpdateProfile /> },
-      { path: "success", element: <SuccessPage /> },
+      {
+        path: "update-profile",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "booking",
+        element: (
+          <PrivateRoute>
+            <MyBookings />
+          </PrivateRoute>
+        ),
+      },
       { path: "reviews", element: <AllReviews /> },
       {
         path: "dashboard",
@@ -55,6 +67,16 @@ const router = createBrowserRouter([
             <Dashboard />
           </PrivateRoute>
         ),
+        children: [
+          {
+            index: true,
+            element: (
+              <PrivateRoute>
+                <Statistics />
+              </PrivateRoute>
+            ),
+          },
+        ],
       },
 
       {
@@ -102,8 +124,8 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: "login", element: <Login /> },
-  { path: "signup", element: <SignUp /> },
+  { path: "/login", element: <Login /> },
+  { path: "/signup", element: <SignUp /> },
   // {
   //   path: "/admin",
   //   element: <AdminLayout />,

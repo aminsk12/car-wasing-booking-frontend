@@ -159,7 +159,7 @@ const ServiceDetails = () => {
       </div>
 
       {/* Book Button */}
-      {selectedSlots.length > 0 && (
+      {selectedSlots?.length > 0 && (
         <div className="text-center mt-6">
           <button
             onClick={handleBooking}

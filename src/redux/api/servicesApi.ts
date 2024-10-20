@@ -38,7 +38,7 @@ const authApi = baseApi.injectEndpoints({
       providesTags: ["Service"],
     }),
 
-    getServiceById: builder.query({
+    getServiceById: builder?.query({
       query: (id: string) => ({
         url: `/services/${id}`,
         method: "GET",
@@ -53,7 +53,7 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
-    getSingleSlotsById: builder.query({
+    getSingleSlotsById: builder?.query({
       query: (id: string) => ({
         url: `/slots/availability/${id}`,
         method: "GET",

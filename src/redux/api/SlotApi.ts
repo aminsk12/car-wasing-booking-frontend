@@ -2,11 +2,11 @@ import { baseApi } from "./baseApi";
 
 const slotApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getSlots: builder.query({
+    getSlots: builder?.query({
       query: () => "/slots/availability",
       providesTags: ["Slot"],
     }),
-    updateSlot: builder.mutation({
+    updateSlot: builder?.mutation({
       query: ({ id, isBooked, token }) => ({
         url: `/slots/${id}`,
         method: "PATCH",
@@ -24,7 +24,7 @@ const slotApi = baseApi.injectEndpoints({
     //     body: slot,
     //   }),
     // }),
-    createSlot: builder.mutation({
+    createSlot: builder?.mutation({
       query: ({ slotDetails, token }) => {
         console.log(slotDetails, token);
         return {
