@@ -30,7 +30,7 @@ const promotions = [
 
 const Promotions: React.FC = () => {
   return (
-    <section className="bg-gray-50 py-12">
+    <section className=" py-12">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-black text-center mb-6">Current Promotions</h2>
         <p className="text-lg text-gray-600 text-center mb-10">Don’t miss out on these special offers and discounts!</p>

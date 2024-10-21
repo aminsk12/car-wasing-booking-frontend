@@ -70,7 +70,7 @@ const Services = () => {
           {/* Filter Dropdown */}
           <select
             onChange={handleFilterChange}
-            className="p-3 rounded-lg border dark:text-black border-gray-300 w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+            className="p-3 rounded-lg border dark:text-black  w-full md:w-1/3 focus:outline-none transition duration-200"
           >
             <option value="">Filter by</option>
             <option value="5000">Price: 5000</option>

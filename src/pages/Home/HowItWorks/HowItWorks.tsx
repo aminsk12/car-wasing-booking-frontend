@@ -32,7 +32,7 @@ const steps = [
 
 const HowItWorks: React.FC = () => {
   return (
-    <section className="bg-gray-100 py-12">
+    <section className=" py-12">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-indigo-600 text-center mb-10">
           How It Works

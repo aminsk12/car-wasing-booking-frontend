@@ -12,7 +12,7 @@ import CustomerTestimonials from "../CustomerTestimonials/CustomerTestimonials";
 
 const Home = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen ">
       {/* Hero Banner */}
       <Banner />
 

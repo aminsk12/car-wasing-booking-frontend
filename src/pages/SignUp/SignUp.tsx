@@ -57,7 +57,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#30415A] via-[#3D6D8D] to-[#4A9BB5]">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#baecf8] via-[#94cdf3] to-[#686bec]">
       <div className="w-full max-w-md bg-white shadow-md rounded-lg p-8">
         <h2 className="text-2xl font-semibold text-center text-[#30415A]">
           Sign Up
@@ -162,7 +162,7 @@ const SignUp: React.FC = () => {
           <div>
             <button
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#30415A] hover:bg-[#3D6D8D] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4A9BB5]"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#2572e6] hover:bg-[#095af1] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4A9BB5]"
             >
               Register
             </button>
@@ -174,7 +174,7 @@ const SignUp: React.FC = () => {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="font-medium text-[#30415A] hover:text-[#3D6D8D]"
+              className="font-medium text-[#7227ec] hover:text-[#3D6D8D]"
             >
               Sign in
             </Link>

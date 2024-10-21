@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const FeaturedServiceCard = ({ service }: { service: any }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   return (
     <Link
       to={`/services/${service?._id}`}
@@ -15,9 +17,29 @@ const FeaturedServiceCard = ({ service }: { service: any }) => {
         />
         <div className="p-6">
           <h3 className="text-2xl font-semibold mb-2 text-[#30415A]">
-            {service.name}
+          <p className="text-gray-700 mb-4">
+            {isExpanded
+              ? service.name
+              : service.name.slice(0, 50)}
+            <span
+              className="text-black font-bold cursor-pointer"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? " Read less..." : " ..."}
+            </span>
+          </p>
           </h3>
-          <p className="text-gray-700 mb-4">{service.description}</p>
+          <p className="text-gray-700 mb-4">
+            {isExpanded
+              ? service.description
+              : service.description.slice(0, 200)}
+            <span
+              className="text-black font-bold cursor-pointer"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? " Read less..." : " Read more..."}
+            </span>
+          </p>
         </div>
       </div>
     </Link>

@@ -24,7 +24,7 @@ const ContactAndSupport: React.FC = () => {
   };
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-12 bg-cyan-100">
       <div className="max-w-7xl mx-auto px-4">
         {/* Contact Info */}
         <div className="text-center mb-12">

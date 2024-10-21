@@ -20,14 +20,6 @@ const services = [
     price: "$25",
   },
   {
-    id: 3,
-    name: "Full Detailing",
-    description: "Complete detailing inside and out for a pristine car.",
-    image:
-      "https://plus.unsplash.com/premium_photo-1670002392440-0a64552ae431?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    price: "$50",
-  },
-  {
     id: 4,
     name: "Premium Wash",
     description: "Luxury wash with premium wax and finishing touches.",
@@ -35,11 +27,19 @@ const services = [
       "https://plus.unsplash.com/premium_photo-1664298064912-4caa5049602e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     price: "$40",
   },
+  {
+    id: 3,
+    name: "Full Detailing",
+    description: "Complete detailing inside and out for a pristine car.",
+    image:
+      "https://plus.unsplash.com/premium_photo-1670002392440-0a64552ae431?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    price: "$50",
+  },
 ];
 
 const PopularFeatured: React.FC = () => {
   return (
-    <section className="bg-gray-50 py-12">
+    <section className="py-12">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold text-black mb-6">
           Featured Services
@@ -69,7 +69,7 @@ const PopularFeatured: React.FC = () => {
                   {service.price}
                 </p>
                 <Link to={"/services"}>
-                  <button className="mt-4 w-full bg-[#30415A] text-white py-2 px-4 rounded-md hover:bg-[#30415A] transition-colors">
+                  <button className="mt-4 w-full bg-[#0964ec] text-white py-2 px-4 rounded-md hover:bg-[#b93fd1] transition-colors">
                     Book Now
                   </button>
                 </Link>

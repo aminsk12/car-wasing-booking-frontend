@@ -152,7 +152,7 @@ const AdminSidebar: React.FC = () => {
 
         className={`flex flex-col ${
           isOpen ? "w-64" : isMobile ? "w-0" : "w-16"
-        } bg-[#30415A] text-white h-screen transition-all duration-300 fixed md:relative z-50`}
+        } bg-[#9803fc] text-white h-screen transition-all duration-300 fixed md:relative z-50`}
       >
         {/* Sidebar Header */}
         <div className="flex items-center justify-between px-2 p-4">

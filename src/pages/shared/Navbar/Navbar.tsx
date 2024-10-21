@@ -31,10 +31,14 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-[#30415A] fixed w-full z-10 shadow-sm text-white rounded-sm">
-      <nav className="container text-white bg-[#30415A] mx-auto flex items-center justify-between space-x-10 py-4">
+    <header className="bg-[#9803fc] z-20 fixed w-full shadow-sm text-white rounded-sm">
+      <nav className="container text-white  mx-auto flex items-center justify-between space-x-10 py-4">
         <Link to="/" className="text-white font-bold text-lg">
-          Car Wash
+          <img
+            src="../../../../public/logo.webp"
+            alt="logo"
+            className="w-14 h-14 rounded-full"
+          />
         </Link>
 
         {/* Desktop Menu */}

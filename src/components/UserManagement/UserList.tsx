@@ -76,15 +76,17 @@ const UserList: React.FC = () => {
           <TableRow className="bg-gray-100">
             <TableHead className="px-4 py-2 text-center">Name</TableHead>
             <TableHead className="px-4 py-2 text-center">Email</TableHead>
+            <TableHead className="px-4 py-2 text-center">Phone</TableHead>
             <TableHead className="px-4 py-2 text-center">Role</TableHead>
             <TableHead className="px-4 py-2 text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody >
           {users?.data?.map((user: any) => (
             <TableRow key={user._id}>
               <TableCell className="text-center">{user.name}</TableCell>
               <TableCell className="text-center">{user.email}</TableCell>
+              <TableCell className="text-center">{user.phone}</TableCell>
               <TableCell className="text-center">
                 <span className={`px-2 py-1 rounded ${roleColors[user.role]}`}>
                   {user.role}

@@ -54,10 +54,10 @@ const ReviewForm = () => {
   return (
     <section className="py-12">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 dark:text-white text-[#30415A] text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-8  text-[#30415A] text-center">
           Leave a Review
         </h2>
-        <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
+        <div className=" p-6 rounded-lg shadow-lg mb-8">
           <div className="flex justify-center items-center mb-4">
             <Rating
               style={{ maxWidth: 250 }}
@@ -67,8 +67,9 @@ const ReviewForm = () => {
             />
           </div>
           <textarea
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 bg-gradient-to-b from-indigo-100 from-10% via-sky-100 via-30% to-emerald-100 to-90% border rounded-lg"
             placeholder="Write your feedback here..."
+          
             rows={5}
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}

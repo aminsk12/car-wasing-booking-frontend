@@ -51,7 +51,7 @@ const CustomerTestimonials: React.FC = () => {
   const { data: reviews } = useGetAllReviewsQuery(undefined);
   // console.log(reviews?.data);
   return (
-    <section className="py-12 bg-gradient-to-b from-gray-50 to-gray-100">
+    <section className="py-12 ">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-10">
           What Our Customers Say

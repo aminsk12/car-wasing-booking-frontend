@@ -34,7 +34,7 @@ const features = [
 
 const WhyChooseUs: React.FC = () => {
   return (
-    <section className="py-12 bg-white">
+    <section className="py-12">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
           Why Choose Us

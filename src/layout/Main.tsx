@@ -7,7 +7,7 @@ const Main = () => {
     location.pathname.includes("login") || location.pathname.includes("signup");
 
   return (
-    <div className="">
+    <div className="bg-gradient-to-b from-indigo-100 from-10% via-sky-100 via-30% to-emerald-200 to-100%">
       {noHeaderFooter || <Navbar></Navbar>}
       <div className=" min-h-[calc(100vh-68px)]">
         <Outlet />
